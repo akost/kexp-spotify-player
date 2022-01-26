@@ -5,7 +5,6 @@ import NowPlaying from './NowPlaying';
 import PlayerControls from './PlayerControls';
 import PlayerHeader from './PlayerHeader';
 import SpotifySessionExpired from './SpotifySessionExpired';
-import AerobaticInfo from './AerobaticInfo';
 import OpenSourceLink from './OpenSourceLink';
 
 import * as spotifyAuth from '../lib/spotifyAuth';

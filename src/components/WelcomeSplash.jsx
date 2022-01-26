@@ -3,7 +3,6 @@ import glamorous from 'glamorous';
 import * as spotifyAuth from '../lib/spotifyAuth';
 import spotifyIcon from '../icons/spotify.svg';
 import {colors} from '../lib/common';
-import AerobaticInfo from './AerobaticInfo';
 import OpenSourceLink from './OpenSourceLink';
 
 const Container = glamorous.section({
