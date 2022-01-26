@@ -115,7 +115,6 @@ const WelcomeSplash = () => (
         </div>
       </button>
     </div>
-    <AerobaticInfo />
     <OpenSourceLink />
   </Container>
 );
