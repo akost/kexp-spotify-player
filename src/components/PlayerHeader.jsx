@@ -31,7 +31,7 @@ const PlayerHeader = ({currentShow}) => (
     <h2>KEXP + Spotify</h2>
     {currentShow && (
       <div>
-        <span className="onnow">ON NOW:</span>
+        <span className="onnow">ON AIR NOW:</span>
         <a className="host" href="http://www.kexp.org" target="_blank" rel="noopener noreferrer">{currentShow.name} with {currentShow.host}</a>
       </div>  
     )}

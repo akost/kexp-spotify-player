@@ -16,7 +16,7 @@ const KexpShow = ({show}) => {
 
   return (
     <Wrapper>
-      <span className="onnow">ON NOW:</span> <span className="host">{show.name} with {show.host}</span>
+      <span className="onnow">ON AIR NOW:</span> <span className="host">{show.name} with {show.host}</span>
     </Wrapper>
   );
 };
