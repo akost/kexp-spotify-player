@@ -22,3 +22,4 @@ yarn-error.log*
 
 aero-deploy.tar.gz
 *.log
+.env
