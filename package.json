@@ -12,10 +12,11 @@
     "prop-types": "^15.5.10",
     "query-string": "^4.3.4",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-scripts": "1.0.7"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    
   },
   "scripts": {
     "start": "react-scripts start",
