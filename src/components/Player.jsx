@@ -12,7 +12,7 @@ import * as spotifyAuth from '../lib/spotifyAuth';
 import * as spotifyApi from '../lib/spotifyApi';
 import * as kexpApi from '../lib/kexpApi';
 
-const STREAM_URL = 'http://live-mp3-128.kexp.org/kexp128.mp3';
+const STREAM_URL = 'https://kexp-mp3-128.streamguys1.com/kexp128.mp3';
 
 class Player extends Component {  
   constructor() {
