@@ -144,7 +144,6 @@ class Player extends Component {
           validSpotifyToken={this.state.validSpotifyToken}
           onSaveTrack={this.saveToSpotify}
         />
-        {this.state.nowPlaying && <AerobaticInfo />}
         {this.state.nowPlaying && <OpenSourceLink />}
       </div>
     );
