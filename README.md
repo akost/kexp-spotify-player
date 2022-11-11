@@ -2,7 +2,7 @@
 
 A progressive web app mashup of the [KEXP radio](http://www.kexp.org) stream and [Spotify](https://www.spotify.com). As each new song plays on KEXP the player shows augmented track info from Spotify and lets you add the song directly to your music collection with one click.
 
-Check it out at https://likekexp.herokuapp.com/
+Check it out at https://kexp-spotify.kost.to/
 
 Forked from [aerobatic/kexp-spotify-player](https://github.com/aerobatic/kexp-spotify-player)
 
