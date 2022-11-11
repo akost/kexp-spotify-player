@@ -13,6 +13,9 @@ const Container = glamorous.section({
     fontWeight: 600,
     backgroundColor: colors.orange,
   },
+  '& .connectSpotify': {
+    margin: '10px 0',
+  },
   '& .hero': {
     padding: '30px 10px',
     textAlign: 'center',
@@ -90,6 +93,15 @@ const WelcomeSplash = () => (
     <div className="header">
       KEXP + Spotify Player
     </div>
+    <div className="connectSpotify">
+      <p>Click below to authorize the player to connect to your Spotify account and start enjoying the music.</p>
+      <button className="authorize" onClick={() => spotifyAuth.navigateToAuth()}>
+          <div>
+            <img src={spotifyIcon} alt="Spotify" />
+            <span>Connect with Spotify</span>
+          </div>
+      </button>
+    </div>
     <div className="hero">
       <img src="/hero.png" alt="KEXP + Spotify" />
       <h3>The two best sources of music on the internet are even better together</h3>
@@ -106,13 +118,7 @@ const WelcomeSplash = () => (
           <span>Mobile friendly for listening on the go</span>
         </div>
       </div>
-      <p>Click below to authorize the player to connect to your Spotify account and start enjoying the music.</p>
-      <button className="authorize" onClick={() => spotifyAuth.navigateToAuth()}>
-        <div>
-          <img src={spotifyIcon} alt="Spotify" />
-          <span>Connect with Spotify</span>
-        </div>
-      </button>
+     
     </div>
     <OpenSourceLink />
   </Container>
