@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Player from './components/Player';
-import WelcomeSplash from './components/WelcomeSplash';
 import * as spotifyAuth from './lib/spotifyAuth';
 import glamorous from 'glamorous'
 
@@ -15,14 +14,7 @@ const AppShell = glamorous.section({
 
 class App extends Component {  
   render() {
-    let Child;
-
-    if (spotifyAuth.validAccessToken() !== true) {
-      Child = <WelcomeSplash />;
-    } else {
-      Child = <Player />;
-    }
-
+    let Child = <Player />;
     return (
       <AppShell>{Child}</AppShell>
     );
