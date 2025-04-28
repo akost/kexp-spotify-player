@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Player from './components/Player';
-import * as spotifyAuth from './lib/spotifyAuth';
 import glamorous from 'glamorous'
 
 import './App.css';

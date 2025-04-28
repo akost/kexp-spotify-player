@@ -86,7 +86,7 @@ class NowPlaying extends Component {
   }
 
   renderTrackDetails() {
-    const {nowPlaying, validSpotifyToken, onSaveTrack} = this.props;
+    const {nowPlaying, onSaveTrack} = this.props;
 
     return (
       <div className="details">

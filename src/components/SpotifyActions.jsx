@@ -110,12 +110,8 @@ const renderActionButtons = (nowPlaying, onSave) => {
   );
 }
 
-const renderNoData = () => {
-  return <div className="no-spotify-data">No data for track</div>;
-}
-
 const renderUnauthorizedSpotifyLink = (nowPlaying) => {
-  let spotifySearchUrl = `https://open.spotify.com/search/${nowPlaying.artist}+-+${nowPlaying.track}`;
+  let spotifySearchUrl = `https://open.spotify.com/search/${nowPlaying.artist} - ${nowPlaying.track}`;
   spotifySearchUrl.trim().replaceAll(' ', '+');
   return (
     <div className="buttons">
