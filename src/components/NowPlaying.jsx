@@ -118,6 +118,29 @@ class NowPlaying extends Component {
     );
   }
 
+  renderAlbumArt() {
+    const {nowPlaying} = this.props;
+    let albumArt = vinylRecord;
+
+    if (!nowPlaying) return null;
+    
+    if(nowPlaying.releaseImage) {
+      albumArt = nowPlaying.releaseImage;
+    }
+
+    // If we have Spotify data
+    if (nowPlaying.albumImage) {
+      albumArt = nowPlaying.albumImage;
+    } 
+
+    return (
+      <div className="image">
+        <img src={albumArt} alt={nowPlaying.release}/>
+      </div>
+    );
+  }
+
+
   render() {
     const {nowPlaying} = this.props;
     if (!nowPlaying) return null;
@@ -125,13 +148,8 @@ class NowPlaying extends Component {
     return (
       <Wrapper>
         {nowPlaying.playType === 'Air break' ? this.renderAirbreak() : this.renderTrackDetails()}
-        <div className="image">
-          {
-            nowPlaying.albumImage ?
-              <img src={nowPlaying.albumImage} alt={nowPlaying.release}/> :
-              <img src={vinylRecord} alt="No album art available" />
-          }
-        </div>
+        {this.renderAlbumArt()}
+        
       </Wrapper>
     );
   }  
@@ -143,6 +161,7 @@ NowPlaying.propTypes = {
     track: PropTypes.string,
     release: PropTypes.string,
     releaseYear: PropTypes.number,
+    releaseImage: PropTypes.string,
     albumImage: PropTypes.string,
     playType: PropTypes.string,
     comment: PropTypes.string,

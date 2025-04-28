@@ -20,6 +20,7 @@ export const nowPlaying = () => {
         }
         if (result.release) {
           nowPlaying.release = result.release.name;
+          nowPlaying.releaseImage = result.release.largeimageuri;
         }
         if (result.releaseevent) {
           nowPlaying.releaseYear = result.releaseevent.year;

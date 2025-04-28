@@ -1,6 +1,6 @@
 {
   "short_name": "KEXP + Spotify",
-  "name": "KEXP + Spotify Player",
+  "name": "KEXP + Spotify integration",
   "icons": [
     {
       "src": "favicon.ico",

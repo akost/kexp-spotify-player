@@ -26,7 +26,7 @@ const Wrapper = glamorous.div({
 const OpenSourceLink = () => (
   <Wrapper>
     <GitHubIcon />
-    <span>The KEXP + Spotify Player is <a href="https://github.com/akost/kexp-spotify-player" target="_blank" rel="noopener noreferrer">open source software</a>.</span>
+    <span>The <b>KEXP &times; Spotify</b> is <a href="https://github.com/akost/kexp-spotify-player" target="_blank" rel="noopener noreferrer">open source software</a>.</span>
   </Wrapper>
 );
 
