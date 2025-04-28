@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Howl } from 'howler';
 import {isEqual} from 'lodash/lang';
 import NowPlaying from './NowPlaying';
-import PlayerControls from './PlayerControls';
 import PlayerHeader from './PlayerHeader';
 import SpotifySessionExpired from './SpotifySessionExpired';
 import OpenSourceLink from './OpenSourceLink';
@@ -17,14 +15,6 @@ class Player extends Component {
   constructor() {
     super();
 
-    this.liveStream = new Howl({
-      src: [STREAM_URL + '?nocache=' + Date.now()],
-      html5: true,
-      onend: () => {
-        console.log('KEXP live stream ended');
-      }
-    });
-
     this.state = {
       validSpotifyToken: spotifyAuth.validAccessToken(),
       isPlaying: false,
@@ -32,17 +22,6 @@ class Player extends Component {
     };
 
     setInterval(this.checkForValidSpotifyToken, 1000);
-  }
-
-  handlePlayClick = () => {
-    this.setState({isPlaying: true});
-    this.liveStream.mute(false);
-    this.liveStream.play();
-  }
-
-  handlePauseClick = () => {
-    this.setState({isPlaying: false});
-    this.liveStream.mute(true);
   }
 
   componentDidMount() {
@@ -131,10 +110,6 @@ class Player extends Component {
     return (
       <div className="App">
         <PlayerHeader currentShow={this.state.currentShow} />
-        <PlayerControls
-          isPlaying={this.state.isPlaying}
-          onPlay={this.handlePlayClick}
-          onPause={this.handlePauseClick} />
         
         {!this.state.validSpotifyToken && <SpotifySessionExpired />}
 
