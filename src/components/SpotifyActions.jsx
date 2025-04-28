@@ -10,6 +10,7 @@ const Wrapper = glamorous.div({
     alignItems: 'center',
     fontSize: 14,
     fontWeight: 600,
+    textTransform: 'uppercase',
     color: colors.white,
     '& svg': {
       fill: colors.green,
@@ -113,6 +114,23 @@ const renderNoData = () => {
   return <div className="no-spotify-data">No data for track</div>;
 }
 
+const renderUnauthorizedSpotifyLink = (nowPlaying) => {
+  let spotifySearchUrl = `https://open.spotify.com/search/${nowPlaying.artist}+-+${nowPlaying.track}`;
+  spotifySearchUrl.trim().replaceAll(' ', '+');
+  return (
+    <div className="buttons">
+      <a className="open" target="_blank" rel="noopener noreferrer"
+         href={spotifySearchUrl}>
+        <div>
+          <OpenExternalIcon />
+          <span>Open</span>
+        </div>
+      </a>
+    </div>
+  );
+}
+
+
 const SaveToSpotify = ({onSave, nowPlaying}) => {
   if (!nowPlaying) return null;
 
@@ -120,9 +138,9 @@ const SaveToSpotify = ({onSave, nowPlaying}) => {
     <Wrapper>
       <div className="header">
         <SpotifyIcon />
-        SPOTIFY
+        Spotify
       </div>
-      {nowPlaying.spotifyTrackId ? renderActionButtons(nowPlaying, onSave) : renderNoData()}
+      {nowPlaying.spotifyTrackId ? renderActionButtons(nowPlaying, onSave) : renderUnauthorizedSpotifyLink(nowPlaying)}
     </Wrapper>
   );
 };

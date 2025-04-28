@@ -112,7 +112,7 @@ class NowPlaying extends Component {
           )}
         </div>
         <div>
-          {validSpotifyToken && <SpotifyActions nowPlaying={nowPlaying} onSave={onSaveTrack}/>}
+          {<SpotifyActions nowPlaying={nowPlaying} onSave={onSaveTrack}/>}
         </div>
       </div>
     );

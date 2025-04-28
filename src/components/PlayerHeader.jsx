@@ -14,7 +14,8 @@ const Wrapper = glamorous.div({
     display: 'inline-block',
     marginTop: 8,
     marginRight: 8,
-    fontSize: 12
+    fontSize: 12,
+    textTransform: 'uppercase'
   },
   '& .host': {
     fontSize: 12,
@@ -31,7 +32,7 @@ const PlayerHeader = ({currentShow}) => (
     <h2>KEXP + Spotify</h2>
     {currentShow && (
       <div>
-        <span className="onnow">ON AIR NOW:</span>
+        <span className="onnow">On air now:</span>
         <a className="host" href="http://www.kexp.org" target="_blank" rel="noopener noreferrer">{currentShow.name} with {currentShow.host}</a>
       </div>  
     )}
