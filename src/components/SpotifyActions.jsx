@@ -112,7 +112,7 @@ const renderActionButtons = (nowPlaying, onSave) => {
 
 const renderUnauthorizedSpotifyLink = (nowPlaying) => {
   let spotifySearchUrl = `https://open.spotify.com/search/${nowPlaying.artist} - ${nowPlaying.track}`;
-  spotifySearchUrl.trim().replaceAll(' ', '+');
+  spotifySearchUrl = spotifySearchUrl.trim().replaceAll(' ', '+');
   return (
     <div className="buttons">
       <a className="open" target="_blank" rel="noopener noreferrer"
