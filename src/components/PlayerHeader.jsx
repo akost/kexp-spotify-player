@@ -33,7 +33,7 @@ const PlayerHeader = ({currentShow}) => (
     {currentShow && (
       <div>
         <span className="onnow">On air now:</span>
-        <a className="host" href="http://www.kexp.org" target="_blank" rel="noopener noreferrer">{currentShow.name} with {currentShow.host}</a>
+        <a className="host" href="https://kexp.org/playlist/" target="_blank" rel="noopener noreferrer">{currentShow.name} with {currentShow.host}</a>
       </div>  
     )}
   </Wrapper>
