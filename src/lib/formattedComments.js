@@ -1,6 +1,7 @@
 import React from 'react';
+import { LinkItUrl } from 'react-linkify-it';
 
-function TextWithLineBreaks(props) {
+function FormattedComments(props) {
   const textWithBreaks = props.text.split('\n').map((text, index) => (
     <span key={index}>
       {text}
@@ -8,7 +9,7 @@ function TextWithLineBreaks(props) {
     </span>
   ));
 
-  return <div>{textWithBreaks}</div>;
+  return <LinkItUrl>{textWithBreaks}</LinkItUrl>;
 }
 
-export default TextWithLineBreaks;
+export default FormattedComments;

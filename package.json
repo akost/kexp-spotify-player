@@ -1,6 +1,6 @@
 {
   "name": "kexp-spotify",
-  "homepage" : "https://kexp-spotify.kost.to/",
+  "homepage": "https://kexp-spotify.kost.to/",
   "version": "0.4.0",
   "private": true,
   "license": "MIT",
@@ -12,17 +12,28 @@
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "query-string": "^4.3.4",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-scripts": "1.0.7"
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "react-linkify-it": "^1.0.8",
+    "react-scripts": "5.0.1"
   },
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

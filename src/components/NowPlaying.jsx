@@ -4,7 +4,8 @@ import glamorous from 'glamorous';
 import {colors} from '../lib/common';
 import vinylRecord from '../icons/vinyl-record.svg';
 import SpotifyActions from './SpotifyActions';
-import TextWithLineBreaks from '../lib/textWithLineBreaks';
+import FormattedComments from '../lib/formattedComments';
+import { LinkItUrl } from 'react-linkify-it';
 
 const Wrapper = glamorous.div({
   display: 'flex',
@@ -16,6 +17,10 @@ const Wrapper = glamorous.div({
     '& img': {
       maxWidth: '100%'
     }
+  },
+  '& .comment a': {
+        color: '#feac31',
+        textDecoration: 'none'
   },
   '& .details': {
     display: 'flex',
@@ -65,6 +70,7 @@ const Wrapper = glamorous.div({
       textAlign: 'center',
       width: '100%'
     },
+    
     '& .airbreak': {
       textAlign: 'center',
       fontSize: 22,
@@ -88,7 +94,7 @@ class NowPlaying extends Component {
 
   renderTrackDetails() {
     const {nowPlaying, onSaveTrack} = this.props;
-
+            
     return (
       <div className="details">
         <div>
@@ -101,7 +107,7 @@ class NowPlaying extends Component {
               <div className="label">Album</div>
               <div className="value">
                 {nowPlaying.release}
-                {nowPlaying.releaseYear && ` - ${nowPlaying.releaseYear}`}
+                {nowPlaying.releaseYear && ` – ${nowPlaying.releaseYear}`}
               </div>
             </div>
           )}
@@ -109,7 +115,7 @@ class NowPlaying extends Component {
             <div>
               <div className="label">DJ Comments</div>
               <div className="value comment">
-                <TextWithLineBreaks text={nowPlaying.comment} />
+                  <FormattedComments text={nowPlaying.comment} />
               </div>
             </div>
           )}
