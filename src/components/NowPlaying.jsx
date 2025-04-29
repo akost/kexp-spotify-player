@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 import {colors} from '../lib/common';
 import vinylRecord from '../icons/vinyl-record.svg';
 import SpotifyActions from './SpotifyActions';
+import TextWithLineBreaks from '../lib/textWithLineBreaks';
 
 const Wrapper = glamorous.div({
   display: 'flex',
@@ -107,7 +108,9 @@ class NowPlaying extends Component {
           {nowPlaying.comment && (
             <div>
               <div className="label">DJ Comments</div>
-              <div className="value comment">{nowPlaying.comment.replace(/\n/g, '<br/>')}</div>
+              <div className="value comment">
+                <TextWithLineBreaks text={nowPlaying.comment} />
+              </div>
             </div>
           )}
         </div>
