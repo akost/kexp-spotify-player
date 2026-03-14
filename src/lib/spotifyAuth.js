@@ -69,7 +69,7 @@ export const navigateToAuth = (redirectState = {}) => {
   const correlationId = random(1000, 2000);
   const query = {
     client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
-    response_type: 'token',
+    response_type: 'code',
     scope: SCOPES.join(' '),
     redirect_uri: window.location.origin + '/spotify_callback',
     state: correlationId
