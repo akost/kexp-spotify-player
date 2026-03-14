@@ -9,11 +9,12 @@ import * as spotifyAuth from './lib/spotifyAuth';
 const root = document.getElementById('root');
 
 if (window.location.pathname === '/spotify_callback') {
-  const params = querystring.parse(window.location.hash);
+  const urlParams = new URLSearchParams(window.location.search);
+  let code = urlParams.get('code');
 
   let authError;
   try {
-    spotifyAuth.authCallback(params);
+    spotifyAuth.getToken(code);
   } catch (err) {
     authError = err;
   }

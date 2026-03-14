@@ -4,38 +4,92 @@ import {random} from 'lodash/number';
 
 const SCOPES = ['user-library-read', 'user-library-modify'];
 const AUTH_URL = 'https://accounts.spotify.com/authorize';
-const ACCESS_TOKEN_KEY = 'spotifyAccessToken';
-const CORRELATION_ID_KEY = 'spotifyAuthCorrelationId';
 
-// Called with the params in the hash passed back by Spotify
-export const authCallback = (queryParams) => {
-  // Ensure that the state param matches what we passed when navigating
-  // to the Spotify auth url
-  if (queryParams.state !== localStorage.getItem(CORRELATION_ID_KEY)) {
-    throw new Error('Invalid auth state');
+const scope = 'user-library-read user-library-modify';
+const authUrl = new URL("https://accounts.spotify.com/authorize")
+
+
+const ACCESS_TOKEN_KEY = 'access_token';
+const CODE_VERIFIER_KEY = 'code_verifier';
+
+const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+
+
+const generateRandomString = (length) => {
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const values = crypto.getRandomValues(new Uint8Array(length));
+  return values.reduce((acc, x) => acc + possible[x % possible.length], "");
   }
 
-  if (queryParams.error) {
-    throw new Error(queryParams.error);
+const sha256 = async (plain) => {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(plain)
+  return window.crypto.subtle.digest('SHA-256', data)
+}
+
+const base64encode = (input) => {
+  return btoa(String.fromCharCode(...new Uint8Array(input)))
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
+}
+
+// Navigate the browser to the Spotify auth page
+export const navigateToAuth = async (redirectState = {}) => {
+  const codeVerifier  = generateRandomString(64);
+  const hashed = await sha256(codeVerifier);
+  const codeChallenge = base64encode(hashed);
+
+  window.localStorage.setItem(CODE_VERIFIER_KEY, codeVerifier);
+
+  const params =  {
+    response_type: 'code',
+    client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+    scope,
+    code_challenge_method: 'S256',
+    code_challenge: codeChallenge,
+    redirect_uri: window.location.origin + '/spotify_callback'
+  };
+
+  authUrl.search = new URLSearchParams(params).toString();
+  window.location.href = authUrl.toString();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  let code = urlParams.get('code');
+}
+
+
+export const getToken = async code => {
+  // stored in the previous step
+  const codeVerifier = localStorage.getItem('code_verifier');
+
+  const url = "https://accounts.spotify.com/api/token";
+  const payload = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      client_id: clientId,
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: window.location.origin + '/spotify_callback',
+      code_verifier: codeVerifier,
+    }),
   }
 
-  const accessToken = queryParams.access_token;
-  if (!accessToken) {
-    throw new Error('Missing access_token');
-  }
-
-  const expiresIn = parseInt(queryParams.expires_in, 10);
-  if (Number.isNaN(expiresIn)) {
-    throw new Error('Invalid expires_in');
-  }
+  const body = await fetch(url, payload);
+  const response = await body.json();
+  const accessToken = response.access_token;
+  const expiresIn = parseInt(response.expires_in, 10);
 
   localStorage.setItem(ACCESS_TOKEN_KEY, JSON.stringify({
     accessToken,
     expiresAt: Date.now() + expiresIn * 1000
   }));
 
-  localStorage.removeItem(CORRELATION_ID_KEY);
-};
+  localStorage.removeItem(CODE_VERIFIER_KEY);
+}
 
 export const getAccessToken = () => {
   let token;
@@ -52,7 +106,6 @@ export const getAccessToken = () => {
     console.log('The spotify access_token is expired');
     return null;
   }
-
   return token.accessToken;
 };
 
@@ -63,23 +116,3 @@ export const validAccessToken = () => {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
   return false;
 };
-
-// Navigate the browser to the Spotify auth page
-export const navigateToAuth = (redirectState = {}) => {
-  const correlationId = random(1000, 2000);
-  const query = {
-    client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
-    response_type: 'code',
-    scope: SCOPES.join(' '),
-    redirect_uri: window.location.origin + '/spotify_callback',
-    state: correlationId
-  };
-
-  window.localStorage.setItem(CORRELATION_ID_KEY, correlationId);
-
-  if (!isEmpty(redirectState)) {
-    query.redirect_uri += '?' + querystring.stringify(redirectState);
-  }
-
-  window.location.href = AUTH_URL + '?' + querystring.stringify(query);
-}
